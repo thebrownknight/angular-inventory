@@ -17,6 +17,7 @@ module.exports = {
   entry: {
     app: [
       'webpack/hot/only-dev-server',
+      'webpack-dev-server/client?http://localhost:8080',
       './app/app.js'
     ],
     vendor: [
@@ -54,6 +55,10 @@ module.exports = {
         test: /\.html$/,
         loader: 'raw-loader',
         exclude: /node_modules/
+      },
+      {
+        test: /\.php$/,
+        loader: 'php-loader'
       }
     ]
   },
@@ -79,6 +84,9 @@ module.exports = {
 
   plugins: [
     // Split code into two chunks, custom code and vendor code
+    new webpack.HotModuleReplacementPlugin(),
+    new webpack.NoErrorsPlugin(),
+
     new CommonsChunkPlugin("vendor", "vendor.bundle.js"),
 
     new HtmlWebpackPlugin({
@@ -86,14 +94,24 @@ module.exports = {
       inject: 'body'
     }),
 
-    new CopyWebpackPlugin([{
-      from: './app/assets'
-    }])
+    new CopyWebpackPlugin([
+      {
+        from: './app/assets'
+      },
+      {
+        from: './app/feeds',
+        to: './feeds'
+      }
+    ])
   ],
 
   devServer: {
     contentBase: './dist',
     outputPath: path.join(__dirname, 'dist'),
+    hot: true,
+    proxy: {
+      '*': 'http://localhost:9090'
+    },
     historyApiFallback: true,
     watchOptions: {
       aggregateTimeout: 300,

@@ -5,9 +5,9 @@
   "main": "webpack.config.js",
   "scripts": {
     "webpack": "webpack",
-    "webpack-dev-server": "webpack-dev-server --progress --colors --hot",
+    "webpack-dev-server": "webpack-dev-server --progress --colors",
     "build": "rimraf dist && webpack --bail --progress -profile",
-    "server": "webpack-dev-server --history-api-fallback --inline --progress --hot",
+    "server": "node server & webpack-dev-server --history-api-fallback --inline --progress",
     "start": "npm run server"
   },
   "repository": {
@@ -34,6 +34,7 @@
     "jshint": "^2.9.1",
     "jshint-loader": "^0.8.3",
     "node-sass": "^3.4.2",
+    "php-loader": "^0.1.0",
     "postcss-loader": "^0.8.2",
     "raw-loader": "^0.5.1",
     "rimraf": "^2.5.2",
@@ -44,6 +45,8 @@
   },
   "dependencies": {
     "angular": "^1.5.3",
-    "angular-ui-router": "^0.2.18"
+    "angular-ui-router": "^0.2.18",
+    "express": "^4.13.4",
+    "node-php": "0.0.1"
   }
 }
