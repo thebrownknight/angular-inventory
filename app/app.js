@@ -1,3 +1,4 @@
+import 'bootstrap-sass';
 import angular from 'angular';
 import inventoryApp from './config';
 

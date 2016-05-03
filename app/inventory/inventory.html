@@ -1,3 +1,10 @@
-<div class="inventory-wrapper" ng-repeat="vehicle in inventory.allVehicles">
-  <ivehicle vehicle="vehicle"></ivehicle>
+<div class="inventory-wrapper container">
+  <div class="filters-wrapper col-sm-3 col-xs-12">
+
+  </div>
+  <div class="vehicles-wrapper col-sm-9 col-xs-12">
+    <div class="vehicles" ng-repeat="vehicle in inventory.allVehicles">
+      <ivehicle vehicle="vehicle"></ivehicle>
+    </div>
+  </div>
 </div>

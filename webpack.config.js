@@ -21,6 +21,7 @@ module.exports = {
       './app/app.js'
     ],
     vendor: [
+      'bootstrap-loader',
       'angular'
     ]
   },
@@ -57,8 +58,16 @@ module.exports = {
         exclude: /node_modules/
       },
       {
-        test: /\.php$/,
-        loader: 'php-loader'
+        test: /\.woff2?(\?v=[0-9]\.[0-9]\.[0-9])?$/,
+        loader: 'url?limit=10000'
+      },
+      {
+        test: /\.(ttf|eot|svg)(\?[\s\S]+)?$/,
+        loader: 'file-loader'
+      },
+      {
+        test: /bootstrap-sass\/assets\/javascripts\//,
+        loader: 'imports?jQuery=jquery'
       }
     ]
   },
