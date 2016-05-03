@@ -1,24 +1,12 @@
 import uiRouter from 'angular-ui-router';
-import vehiclesService from './services/vehicles.services';
-import inventoryController from './inventory/inventory.controller';
+import inventory from './inventory';
 
 const moduleName = "inventoryApp";
-
-const app = angular.module(moduleName, [ uiRouter, vehiclesService ]);
-
-app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
-  ( $stateProvider, $urlRouterProvider, $locationProvider ) => {
-    // $urlRouterProvider.otherwise('/');
-
-    $stateProvider
-      .state('inventory', {
-        url: '/',
-        template: require('./inventory/inventory.html'),
-        controller: inventoryController,
-        controllerAs: 'inventory'
-      });
-
+angular.module(moduleName, [ uiRouter, inventory ])
+  .config(['$urlRouterProvider', '$locationProvider',
+  ( $urlRouterProvider, $locationProvider ) => {
     $locationProvider.html5Mode(true);
+    $urlRouterProvider.otherwise('/');
 }]);
 
 export default moduleName;

@@ -8,21 +8,35 @@ const HTTP = new WeakMap();
 class VehiclesService {
   constructor($http) {
     HTTP.set(this, $http);
+    this.vehicles = HTTP.get(this).get('/feeds/inventory.json').then(result => result.data);
   }
 
-  fetchVehicles() {
-    return HTTP.get(this)
-      .get('/feeds/inventory.json');
+  getFullVehicles() {
+    return this.vehicles;
   }
 
-  static vehiclesFactory($http) {
-    return new VehiclesService($http);
+  addToCompareList() {
+
+  }
+
+  /* Setters and Getters */
+  setFilters() {
+
+  }
+  getFilters() {
+
+  }
+
+  setSortingParameters() {
+
+  }
+  getSortingParameters() {
+
   }
 }
 
-VehiclesService.vehiclesFactory.$inject = ['$http'];
+VehiclesService.$inject = ['$http'];
 
-angular.module(moduleName, [])
-  .factory('vehiclesService', VehiclesService.vehiclesFactory);
-
-export default moduleName;
+export default angular.module(moduleName, [])
+  .service('vehiclesService', VehiclesService)
+  .name;
