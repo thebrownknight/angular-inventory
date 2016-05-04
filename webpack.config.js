@@ -17,9 +17,11 @@ module.exports = {
   entry: {
     app: [
       'webpack/hot/only-dev-server',
+      'webpack-dev-server/client?http://localhost:8080',
       './app/app.js'
     ],
     vendor: [
+      'bootstrap-loader',
       'angular'
     ]
   },
@@ -54,6 +56,18 @@ module.exports = {
         test: /\.html$/,
         loader: 'raw-loader',
         exclude: /node_modules/
+      },
+      {
+        test: /\.woff2?(\?v=[0-9]\.[0-9]\.[0-9])?$/,
+        loader: 'url?limit=10000'
+      },
+      {
+        test: /\.(ttf|eot|svg)(\?[\s\S]+)?$/,
+        loader: 'file-loader'
+      },
+      {
+        test: /bootstrap-sass\/assets\/javascripts\//,
+        loader: 'imports?jQuery=jquery'
       }
     ]
   },
@@ -79,6 +93,9 @@ module.exports = {
 
   plugins: [
     // Split code into two chunks, custom code and vendor code
+    new webpack.HotModuleReplacementPlugin(),
+    new webpack.NoErrorsPlugin(),
+
     new CommonsChunkPlugin("vendor", "vendor.bundle.js"),
 
     new HtmlWebpackPlugin({
@@ -86,14 +103,24 @@ module.exports = {
       inject: 'body'
     }),
 
-    new CopyWebpackPlugin([{
-      from: './app/assets'
-    }])
+    new CopyWebpackPlugin([
+      {
+        from: './app/assets'
+      },
+      {
+        from: './app/feeds',
+        to: './feeds'
+      }
+    ])
   ],
 
   devServer: {
     contentBase: './dist',
     outputPath: path.join(__dirname, 'dist'),
+    hot: true,
+    proxy: {
+      '*': 'http://localhost:9090'
+    },
     historyApiFallback: true,
     watchOptions: {
       aggregateTimeout: 300,
