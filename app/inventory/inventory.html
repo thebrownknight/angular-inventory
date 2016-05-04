@@ -3,8 +3,15 @@
 
   </div>
   <div class="vehicles-wrapper col-sm-9 col-xs-12">
-    <div class="vehicles" ng-repeat="vehicle in inventory.allVehicles">
-      <ivehicle vehicle="vehicle"></ivehicle>
+    <div class="btn-group" role="group" aria-label="quick-filter-buttons" ng-controller="FiltersController as fc">
+      <button type="button" class="btn btn-default" ng-click="fc.setFilter('quick_filter', 'New Conversions')">New Conversions</button>
+      <button type="button" class="btn btn-default" ng-click="fc.setFilter('quick_filter', 'Used Conversions')">Used Conversions</button>
+      <button type="button" class="btn btn-default" ng-click="fc.setFilter('quick_filter', 'Specials')">Specials</button>
+    </div>
+    <div class="vehicles" ng-controller="InventoryController as ic">
+      <div ng-repeat="vehicle in ic.allVehicles">
+        <ivehicle vehicle="vehicle"></ivehicle>
+      </div>
     </div>
   </div>
 </div>

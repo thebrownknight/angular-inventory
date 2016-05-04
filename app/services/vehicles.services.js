@@ -9,25 +9,31 @@ class VehiclesService {
   constructor($http) {
     HTTP.set(this, $http);
     this.vehicles = HTTP.get(this).get('/feeds/inventory.json').then(result => result.data);
-  }
 
-  getFullVehicles() {
-    return this.vehicles;
+    /** TODO: Need to figure out different way to copy vehicles to filtered vehicles. **/
+    this.filteredVehicles = HTTP.get(this).get('/feeds/inventory.json').then(result => result.data);
   }
 
   addToCompareList() {
 
   }
 
-  /* Setters and Getters */
+  /* Setters */
   setFilters() {
 
   }
-  getFilters() {
+  setSortingParameters() {
 
   }
 
-  setSortingParameters() {
+  /* Getters */
+  getFullVehicles() {
+    return this.vehicles;
+  }
+  getFilteredVehicles() {
+    return this.filteredVehicles;
+  }
+  getFilters() {
 
   }
   getSortingParameters() {

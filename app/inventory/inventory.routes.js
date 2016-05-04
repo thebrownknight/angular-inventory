@@ -4,8 +4,6 @@ export default function routes($stateProvider) {
   $stateProvider
     .state('inventory', {
       url: '/',
-      template: require('./inventory.html'),
-      controller: 'InventoryController',
-      controllerAs: 'inventory'
+      template: require('./inventory.html')
     });
 }
