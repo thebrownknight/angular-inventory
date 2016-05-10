@@ -73,7 +73,7 @@ module.exports = {
   },
 
   jshint: {
-    camelcase: true,
+    camelcase: false,
     emitErrors: true,
     failOnHint: false,
     esversion: 6

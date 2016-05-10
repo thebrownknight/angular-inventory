@@ -1,15 +1,16 @@
-<div class="inventory-wrapper container">
-  <div class="filters-wrapper col-sm-3 col-xs-12">
-
+<div class="inventory-wrapper container" ng-controller="InventoryController as ic">
+  <div class="filters-wrapper col-sm-3 col-xs-12" ng-controller="FiltersController as fc">
+    <input type="text" placeholder="Search by stock number" ng-model="fc.vService.filters.stockNumber">
   </div>
   <div class="vehicles-wrapper col-sm-9 col-xs-12">
     <div class="btn-group" role="group" aria-label="quick-filter-buttons" ng-controller="FiltersController as fc">
-      <button type="button" class="btn btn-default" ng-click="fc.setFilter('quick_filter', 'New Conversions')">New Conversions</button>
-      <button type="button" class="btn btn-default" ng-click="fc.setFilter('quick_filter', 'Used Conversions')">Used Conversions</button>
-      <button type="button" class="btn btn-default" ng-click="fc.setFilter('quick_filter', 'Specials')">Specials</button>
+      <button type="button" class="btn btn-default" ng-click="fc.vService.filters.quickFilter = 'New Conversions'">New Conversions</button>
+      <button type="button" class="btn btn-default" ng-click="fc.vService.filters.quickFilter = 'Used Conversions'">Used Conversions</button>
+      <button type="button" class="btn btn-default" ng-click="fc.vService.filters.quickFilter = 'Specials'">Specials</button>
     </div>
-    <div class="vehicles" ng-controller="InventoryController as ic">
-      <div ng-repeat="vehicle in ic.allVehicles">
+    <div class="vehicles">
+      <p>{{ ic.vService.filters }}</p>
+      <div ng-repeat="vehicle in ic.filteredVehicles">
         <ivehicle vehicle="vehicle"></ivehicle>
       </div>
     </div>
